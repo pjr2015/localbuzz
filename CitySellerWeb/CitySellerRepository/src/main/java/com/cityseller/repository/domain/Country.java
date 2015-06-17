@@ -5,6 +5,8 @@ package com.cityseller.repository.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,6 +19,7 @@ import javax.persistence.Table;
 public class Country {
 	
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "COUNTRY_ID", updatable = true, nullable = false, insertable = true)
 	private Long countryId;
 	
@@ -66,6 +69,15 @@ public class Country {
 	 */
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Country [countryId=" + countryId + ", countryName="
+				+ countryName + ", countryCode=" + countryCode + "]";
 	}
 
 }
