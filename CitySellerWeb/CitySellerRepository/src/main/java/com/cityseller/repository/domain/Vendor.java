@@ -3,7 +3,9 @@
  */
 package com.cityseller.repository.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -71,6 +75,26 @@ public class Vendor {
 	@OneToOne(cascade=CascadeType.DETACH,fetch=FetchType.LAZY)
 	@JoinColumn(name="USER_ID")
 	private UserDetails  userDetails;
+	
+	@ManyToMany(cascade = CascadeType.DETACH,fetch=FetchType.LAZY)
+	@JoinTable(name="city_vendor_xref", joinColumns={@JoinColumn(name="VENDOR_ID")}, inverseJoinColumns={@JoinColumn(name="CITY_AREA_ID")})
+	private List<CityArea> cityAreas;
+	
+	
+
+	/**
+	 * @return the cityAreas
+	 */
+	public List<CityArea> getCityAreas() {
+		return cityAreas;
+	}
+
+	/**
+	 * @param cityAreas the cityAreas to set
+	 */
+	public void setCityAreas(List<CityArea> cityAreas) {
+		this.cityAreas = cityAreas;
+	}
 
 	/**
 	 * @return the vendorId
